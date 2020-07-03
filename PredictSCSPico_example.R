@@ -4,7 +4,10 @@ library(dismo)
 library(gbm)
 
 #Load fitted models
-load('Full_BRT_Model.Rdata')
+load('Chl_BRT.Rdata')
+load('Pro_BRT.Rdata')
+load('Syn_BRT.Rdata')
+load('Peuk_BRT.Rdata')
 
 tDOY <- function(x) cos(x/365 * 2*pi) #Transform DOY
 

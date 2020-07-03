@@ -11,9 +11,16 @@ SCS_surface_simulation.csv: the source data file for predicting the seasonal sur
 
 seats8d.csv: the source data file for hindcasting the Chl a concentrations and picophytoplankton abundances at the SEATS station (116 ºE, 18 ºN). 
 
-Full_BRT_Model.Rdata: The fitted gbm models using full data (from np.Rdata). It contains c_brt_full (the gbm model for Chl a), p_brt_full(the gbm model for Prochlorococcus), s_brt_full (the gbm model for Synechococcus), e_brt_full (the gbm model for picoeukaryotes).
+Chl_BRT.Rdata: The fitted gbm models using full data (from np.Rdata). It contains c_brt_full (the gbm model for Chl a).
 
-etopo05.nc: the global bathymetry netcdf file.
+Pro_BRT.Rdata: The fitted gbm models using full data (from np.Rdata). It contains p_brt_full(the gbm model for Prochlorococcus).
+
+Syn_BRT.Rdata: The fitted gbm models using full data (from np.Rdata). It contains  s_brt_full (the gbm model for Synechococcus).
+
+Peuk_BRT.Rdata: The fitted gbm models using full data (from np.Rdata). It contains  e_brt_full (the gbm model for picoeukaryotes).
+
+
+etopo05.nc: the global bathymetry netcdf file (not included in the repository).
 ****End of Data files*****
 
 

@@ -164,8 +164,11 @@ e_brt_full  <- gbm.step(data=np, gbm.x = 1:7, gbm.y = 11,
                    max.trees = 20000,
                    family = "gaussian", silent = T)
 
-save(c_brt_full, p_brt_full, s_brt_full, e_brt_full, file = 'Full_BRT_Model.Rdata')
-
+load('Full_BRT_Model.Rdata')
+save(c_brt_full, file = 'Chl_BRT.Rdata')
+save(p_brt_full, file = 'Pro_BRT.Rdata')
+save(s_brt_full, file = 'Syn_BRT.Rdata')
+save(e_brt_full, file = 'Peuk_BRT.Rdata')
 
 # Simplify
 #c_brt_sim <- gbm.simplify(c_brt)
