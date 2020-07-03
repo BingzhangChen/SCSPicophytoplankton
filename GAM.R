@@ -31,19 +31,19 @@ for (n in 1:length(K)){
       Test   <- np[y,]
       c_gam  <- gam(logChl~te(lon,lat) + 
                       s(Depth, k = K[n]) + 
-                      s(DOY, bs="cc", k=K[n]) + 
+                      s(DOY, k=K[n]) + 
                       s(logChl0) + 
                       s(T0) + s(I0), data = Train, gamma = GAMMA[p])
       p_gam  <- gam(logPro~te(lon,lat)+s(Depth, k = K[n]) + 
-                      s(DOY,bs="cc", k=K[n])+s(logChl0)+s(T0)+s(I0),
+                      s(DOY,k=K[n])+s(logChl0)+s(T0)+s(I0),
                     data = Train, gamma = GAMMA[p])
       
       s_gam  <- gam(logSyn ~ te(lon,lat)+s(Depth, k = K[n]) + 
-                      s(DOY,bs="cc", k = K[n])+s(logChl0)+s(T0)+s(I0),
+                      s(DOY, k = K[n])+s(logChl0)+s(T0)+s(I0),
                     data = Train, gamma = GAMMA[p])
       
       e_gam  <- gam(logPeuk ~ te(lon,lat)+s(Depth, k = K[n]) + 
-                      s(DOY,bs="cc", k = K[n])+s(logChl0)+s(T0)+s(I0),
+                      s(DOY,k = K[n])+s(logChl0)+s(T0)+s(I0),
                     data = Train, gamma = GAMMA[p])
       
       c.p    <- predict(c_gam,Test)
