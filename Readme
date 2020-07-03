@@ -1,0 +1,49 @@
+This file accompanies the paper entitled "A machine-learning approach to modeling picophytoplankton abundances in the South China Sea" submitted to Progress in Oceanography and introduces each file (including the source data file) needed for using the four machine learnig algorithms to predict picophytoplankton abundances and Chlorophyll (Chl) a concentration in the South China Sea.
+
+*************Metadata for essential files*************************
+
+****Data files*****
+NewPico.csv: original data of in situ picophytoplankton abundances and Chl a concentration collected during six cruises (July 18 to August 16, 2009; January 6 to 30, 2010; October 26 to November 24, 2010; April 30 to May 24, 2011; August 24 to September 24, 2011; July 30 to August 16, 2012) in the South China Sea. This data file also contains simultaneously measured temperature (Temp; unit: ºC), Salinity (Sal), nitrate + nitrite concentration (NO3; unit: µM), phosphate (PO4; unit: µM). Chl: in situ Chl a concentration (µg/L). Pro: Prochlorococcus abundance (cells/mL). Syn: Synechococcus abundance (cells/mL). Peuk: Picoeukaryote abundance (cells/mL). HB: abundance of heterotrophic bacteria (cells/mL). lon: Longitude (ºE). lat: Latitude (ºN). Bot_Depth: bottom depth of the station (m). DOY: Date of the year starting from 1 January. Chl0: in situ surface Chl a concentration (µg/L) corresponding to the Chl a concentration at 0 m. T0: in situ surface temperature (ºC). I0sat: surface daily Photosynthetically Active Radiations (PAR; unit: E m-2 d-1) obtained from  http://oceancolor.gsfc.nasa.gov/. 
+
+np.Rdata: the organized dataframe ready for running machine-learning algorithms. 
+
+SCS_surface_simulation.csv: the source data file for predicting the seasonal surface climatology of the South China Sea. Chl_su: Mean surface Chl a concentration in summer. PAR_su: Mean surface PAR in summer. SST_su: Mean Sea Surface Temperature in summer. The rest columns are for autumn (*_au), winter (*_win), and spring (*_sp).
+
+seats8d.csv: the source data file for hindcasting the Chl a concentrations and picophytoplankton abundances at the SEATS station (116 ºE, 18 ºN). 
+
+Full_BRT_Model.Rdata: The fitted gbm models using full data (from np.Rdata). It contains c_brt_full (the gbm model for Chl a), p_brt_full(the gbm model for Prochlorococcus), s_brt_full (the gbm model for Synechococcus), e_brt_full (the gbm model for picoeukaryotes).
+
+etopo05.nc: the global bathymetry netcdf file.
+****End of Data files*****
+
+
+****R scripts*****
+Make_newdata.R: R script used for reading the source data file ('NewPico.csv') and take log transformations, to generate the "np.Rdata" file for later calculation. 
+
+Fig1_station.R: R script used for plotting Fig. 1 (sampling stations) of the paper.
+
+Fig2_vertical.R: R script used for plotting Fig. 2 (vertical distributions of picophytoplankton abundances and Chl a in four seasons) of the paper.
+
+Fig3_pico_envr.R: R script for plotting Fig. 3 (relationships between picophytoplankton abundances and in situ local temperature, NO3, and satellite derived PAR). 
+
+neuralnet.R: R script for optimizing the topography of the Artificial Neural Network (ANN) algorithm using the "Resilient backpropagation" method (Riedmiller 1994; the default option in R neuralnet function). 
+
+RF.R:  R script for optimizing the number of trees and number of variables randomly sampled as candidates at each split of the Random Forest model. 
+
+GAM.R: R script for optimizing the number of k of the tensor product of Latitude and Longitude, DOY and Depth in the Generalized Addtive Model.
+
+gbm_optim.R:  R script for optimizing the learning rate and tree complexity of the Boosted Regression Trees (BRT).
+
+rel_imp.R: R script for quantifying the relative importance of each predictor in the BRT model.
+
+Pred_seats.R: Rscript for hindcasting Chl a concentration and picophytoplankton abundances at the SEATS station from 2007 to 2013.
+
+Pred_ESM.R: R script for predicting Chl a concentration and picophytoplankton abundances using the outputs of the Community Earth System Model (CESM2) simulated under the CMIP6 "business as usual" (ssp585) scenario.
+
+Calc_bath.R: an auxilliary R script for interpolating bottom depth using knn.
+
+PredictSCSPico_example.R: An example R script showing how to predict Chl a concentration and picophytoplankton abundances.
+
+****End of R scripts*****
+
+
