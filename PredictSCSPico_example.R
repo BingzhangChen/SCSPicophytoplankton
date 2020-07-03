@@ -2,12 +2,35 @@ setwd("~/OneDrive/SCS_pico_niche")
 #First, load disco package
 library(dismo)
 library(gbm)
+load('np.Rdata')
 
-#Load fitted models
-load('Chl_BRT.Rdata')
-load('Pro_BRT.Rdata')
-load('Syn_BRT.Rdata')
-load('Peuk_BRT.Rdata')
+#A full gbm model for South China Sea picophytoplankton
+#All predictors included
+c_brt_full <- gbm.step(data=np, gbm.x = 1:7, gbm.y = 8,  
+                       tree.complexity = 15,
+                       learning.rate   = 0.01,
+                       family = "gaussian", silent = T)
+
+
+p_brt_full  <- gbm.step(data=np, gbm.x = 1:7, gbm.y = 9,  
+                        tree.complexity = 15,
+                        learning.rate   = 0.01,
+                        max.trees = 20000,
+                        family = "gaussian", silent = T)
+
+
+s_brt_full  <- gbm.step(data=np, gbm.x = 1:7, gbm.y = 10,  
+                        tree.complexity = 15,
+                        learning.rate   = 0.01,
+                        max.trees = 20000,
+                        family = "gaussian", silent = T)
+
+e_brt_full  <- gbm.step(data=np, gbm.x = 1:7, gbm.y = 11,  
+                        tree.complexity = 15,
+                        learning.rate   = 0.01,
+                        max.trees = 20000,
+                        family = "gaussian", silent = T)
+
 
 tDOY <- function(x) cos(x/365 * 2*pi) #Transform DOY
 

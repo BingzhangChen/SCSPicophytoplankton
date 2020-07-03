@@ -137,38 +137,7 @@ for (j in 1:4){
   which(MEANR2[j+4,,] == min(MEANR2[j+4,,]), arr.ind = TRUE)
 }
 
-#A full gbm model for South China Sea picophytoplankton
-#All predictors included
-c_brt_full <- gbm.step(data=np, gbm.x = 1:7, gbm.y = 8,  
-                   tree.complexity = 15,
-                   learning.rate   = 0.01,
-                   family = "gaussian", silent = T)
 
-
-p_brt_full  <- gbm.step(data=np, gbm.x = 1:7, gbm.y = 9,  
-                   tree.complexity = 15,
-                   learning.rate   = 0.01,
-                   max.trees = 20000,
-                   family = "gaussian", silent = T)
-
-
-s_brt_full  <- gbm.step(data=np, gbm.x = 1:7, gbm.y = 10,  
-                   tree.complexity = 15,
-                   learning.rate   = 0.01,
-                   max.trees = 20000,
-                   family = "gaussian", silent = T)
-
-e_brt_full  <- gbm.step(data=np, gbm.x = 1:7, gbm.y = 11,  
-                   tree.complexity = 15,
-                   learning.rate   = 0.01,
-                   max.trees = 20000,
-                   family = "gaussian", silent = T)
-
-load('Full_BRT_Model.Rdata')
-save(c_brt_full, file = 'Chl_BRT.Rdata')
-save(p_brt_full, file = 'Pro_BRT.Rdata')
-save(s_brt_full, file = 'Syn_BRT.Rdata')
-save(e_brt_full, file = 'Peuk_BRT.Rdata')
 
 # Simplify
 #c_brt_sim <- gbm.simplify(c_brt)
