@@ -14,12 +14,20 @@ btDOY <- function(x)acos(x)*365/2/pi
 #Use tree complexity = 15 and learning rate = 0.01 to examine individual effects
 SEATSLon <- 116
 SEATSLat <- 18
-Test_DOY <- tDOY(15) #Test winter
+Test_date<- 15
+Test_DOY <- tDOY(Test_date) #Test winter
 
+if (Test_date < 30){
+  fname <- "Fig4_ind_effectWinter.pdf"
+}else{
+  fname <- "Fig4_ind_effectSummer.pdf"
+}
 #First, test interaction of lon and lat
 #set up new dataframe
-lonx    <- seq(min(np$lon), max(np$lon), by = .1)
-latx    <- seq(min(np$lat), max(np$lat), by = .1)
+xlim    <- c(110, 120)
+ylim    <- c(16, 23)
+lonx    <- seq(xlim[1], xlim[2], by = .1)
+latx    <- seq(ylim[1], ylim[2], by = .1)
 lonlatx <- expand.grid(lonx, latx)
 names(lonlatx) <- c('lon','lat')
 newdat_lonlat <- data.frame(lon   = lonlatx[,1],
@@ -331,7 +339,7 @@ NewPro[Bot_Depth >= 0]  <- NA
 NewSyn[Bot_Depth >= 0]  <- NA
 NewPeuk[Bot_Depth >= 0] <- NA
 
-pdf("Fig4_ind_effectWinter25June2020.pdf", width=8, height=8)
+pdf(fname, width=8, height=8)
 op   <- par(font.lab=1,
             family ="serif",
             mar    = c(4,4,2,3),
@@ -351,7 +359,7 @@ plot(NewPro1, depx, type = 'l', lwd = 1.5,
      xaxt='n',
      xlab= expression(paste('Abundance (cells ' * mL^-1 * ')')),
      ylab= 'Depth (m)')
-mtext('A', side = 3, adj = -0.1, cex=1.4)
+mtext('A', side = 3, adj = -0.1, cex=1.2)
 
 #add 95% CI
 lines(YL, depx, lty = 3, col = 1)
@@ -408,7 +416,7 @@ plot(doy, NewPro2, type = 'l', lwd = 1.5,
      xlab= 'Month')
 lines(doy, YL, lty = 3)
 lines(doy, YU, lty = 3)
-mtext('B', side = 3, adj = -0.1, cex=1.4)
+mtext('B', side = 3, adj = -0.1, cex=1.2)
 DOY_Label <- c(15, 75, 135, 195, 255, 315)
 axis(1, at= DOY_Label, 
      label = c('Jan', 'Mar', 'May', 'Jul', 'Sep', 'Nov'))
@@ -461,7 +469,7 @@ axis(1, at= log(X1), label = X1)
 
 lines(newdat_Chl$logChl0, YL, lty = 3)
 lines(newdat_Chl$logChl0, YU, lty = 3)
-mtext('C', side = 3, adj = -0.1, cex=1.4)
+mtext('C', side = 3, adj = -0.1, cex=1.2)
 
 YL <- NewSyn3 - 1.96*SESyn3
 YU <- NewSyn3 + 1.96*SESyn3
@@ -497,7 +505,7 @@ plot(newdat_SST$T0, NewPro4, lwd=1.5, type = 'l',
 axis(2, at= y2, label = X2)
 lines(newdat_SST$T0, YL, col = 1, lty = 3)
 lines(newdat_SST$T0, YU, col = 1, lty = 3)
-mtext('D', side = 3, adj = -0.1, cex=1.4)
+mtext('D', side = 3, adj = -0.1, cex=1.2)
 
 YL <- NewSyn4 - 1.96*SESyn4
 YU <- NewSyn4 + 1.96*SESyn4
@@ -533,7 +541,7 @@ plot(newdat_I0$I0, NewPro5, lwd=1.5, type = 'l',
      xlab= expression(paste(PAR[sat]*' (E '*m^-2*' '*d^-1*')')),
      ylab= expression(paste('Abundance (cells '*mL^-1*')')))
 axis(2, at= y2, label = X2)
-mtext('F', side = 3, adj = -0.1, cex=1.4)
+mtext('E', side = 3, adj = -0.1, cex=1.2)
 lines(newdat_I0$I0, YL, col = 1, lty = 3)
 lines(newdat_I0$I0, YU, col = 1, lty = 3)
 
@@ -568,7 +576,7 @@ image2D(exp(NewChl), lonx, latx,
         cex.axis = 1.2, 
         xlab = 'Longitude (ºE)', 
         ylab = "Latitude (ºN)")
-mtext(bquote('G) Chl (mg '*m^-3*')'), side = 3, adj = 0)
+mtext(bquote('F) Chl (mg '*m^-3*')'), side = 3, adj = 0, cex = 1.2)
 
 image2D(exp(NewPro)/1e4, lonx, latx, 
         col  = jet.colors(20),
@@ -576,8 +584,8 @@ image2D(exp(NewPro)/1e4, lonx, latx,
         cex.axis = 1.2, 
         xlab = 'Longitude (ºE)', 
         ylab = "Latitude (ºN)")
-mtext(bquote('H) Pro ('*10^4*' cells '*mL^-1*')'), 
-      side = 3, adj = 0)
+mtext(bquote('G) Pro ('*10^4*' cells '*mL^-1*')'), 
+      side = 3, adj = 0, cex = 1.2)
 
 image2D(exp(NewSyn)/1e4, lonx, latx, 
         col  = jet.colors(20),
@@ -585,15 +593,15 @@ image2D(exp(NewSyn)/1e4, lonx, latx,
         cex.axis = 1.2, 
         xlab = 'Longitude (ºE)', 
         ylab = "Latitude (ºN)")
-mtext(bquote('I) Syn ('*10^4*' cells '*mL^-1*')'), 
-      side = 3, adj = 0)
+mtext(bquote('H) Syn ('*10^4*' cells '*mL^-1*')'), 
+      side = 3, adj = 0, cex = 1.2)
 
-image2D(exp(NewPeuk)/1e4, lonx, latx, 
+image2D(exp(NewPeuk)/1e4, lonx, latx, zlim=c(0,.5),
         col  = jet.colors(20),
         cex.lab = 1.2, 
         cex.axis = 1.2, 
         xlab = 'Longitude (ºE)', 
         ylab = "Latitude (ºN)")
-mtext(bquote('J) Peuk ('*10^4*' cells '*mL^-1*')'), 
-      side = 3, adj = 0)
+mtext(bquote('I) Peuk ('*10^4*' cells '*mL^-1*')'), 
+      side = 3, adj = 0, cex = 1.2)
 dev.off()
