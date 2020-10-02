@@ -7,8 +7,6 @@ NewPico.csv: original data of in situ picophytoplankton abundances and Chl a con
 
 np.Rdata: the organized dataframe ready for running machine-learning algorithms. 
 
-SCS_surface_simulation.csv: the source data file for predicting the seasonal surface climatology of the South China Sea. Chl_su: Mean surface Chl a concentration in summer. PAR_su: Mean surface PAR in summer. SST_su: Mean Sea Surface Temperature in summer. The rest columns are for autumn (*_au), winter (*_win), and spring (*_sp).
-
 seats8d.csv: the source data file for hindcasting the Chl a concentrations and picophytoplankton abundances at the SEATS station (116 ºE, 18 ºN). 
 
 Chl_BRT.Rdata: The fitted gbm models using full data (from np.Rdata). It contains c_brt_full (the gbm model for Chl a).
@@ -19,8 +17,9 @@ Syn_BRT.Rdata: The fitted gbm models using full data (from np.Rdata). It contain
 
 Peuk_BRT.Rdata: The fitted gbm models using full data (from np.Rdata). It contains  e_brt_full (the gbm model for picoeukaryotes).
 
-
 etopo05.nc: the global bathymetry netcdf file (not included in the repository).
+
+MODIS Aqua Chl, SST, and PAR data are not included due to their large size. These data can be downloaded from https://oceandata.sci.gsfc.nasa.gov/MODIS-Aqua/Mapped/Seasonal_Climatology/9km/ .
 ****End of Data files*****
 
 
@@ -51,6 +50,7 @@ Calc_bath.R: an auxilliary R script for interpolating bottom depth using knn.
 
 PredictSCSPico_example.R: An example R script showing how to predict Chl a concentration and picophytoplankton abundances.
 
+SCS_clim.R: The R script used for producing South China Sea surface climatology of Chl a and picophytoplankton abundances.
 ****End of R scripts*****
 
 
